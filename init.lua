@@ -211,13 +211,12 @@ G = P ( G )
 
 local repl
 repl = lpeg.Cs {
-	(
-		( V"macro" + V"defined" ) +
-		Identifier*Space + String_literal*Space + Character*Space + Number*Space + P(1)
+	V"token"^0 ;
 
-	)^0;
+	token = ( V"macro" + V"defined" ) +
+		Identifier*Space + String_literal*Space + Character*Space + Number*Space + P(1) ;
 
-	macro = lpeg.Cmt ( Carg(1)*Identifier*Space*P"("*Space*V(1)* (P","*Space*V(1))^0 *P")"*Space ,
+	macro = lpeg.Cmt ( Carg(1)*Identifier*Space*P"("*Space*V"token"* (P","*Space*V"token")^0 *P")"*Space ,
 			function ( s , i , state , id , ... )
 				local m = state.macros[id]
 				return m ~= nil , m , ...
