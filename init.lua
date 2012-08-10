@@ -209,6 +209,7 @@ G [ index + 1 ] = V"defined" +
 
 G = P ( G )
 
+-- A grammar that does replacements in C code (has to exclude matches inside of strings etc)
 local repl
 repl = lpeg.Cs {
 	V"token"^0 ;
